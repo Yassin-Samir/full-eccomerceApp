@@ -1,0 +1,36 @@
+.Img {
+  width: 100%;
+  object-fit: cover;
+  margin-top: 50px;
+}
+.dummyParagraph {
+  text-align: center;
+  margin: 50px auto 0;
+  color: rgb(138, 138, 138);
+  width: 90%;
+}
+.mainDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 50px;
+  text-transform: capitalize;
+  font-size: 2rem;
+}
+.mainDisplay p {
+  align-self: flex-start;
+}
+.mainDisplay .ShopJewels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-content: space-between;
+}
+.mainDisplay .ShopJewels .jewel {
+  width: 100%;
+}
+.mainDisplay .ShopJewels a:has(.jewel) {
+  flex-basis: calc(100% / 5);
+}

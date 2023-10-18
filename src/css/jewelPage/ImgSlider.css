@@ -1,0 +1,20 @@
+.JewelImgSlider {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.JewelImgSlider .swiper {
+  width: 100%;
+  height: 100%;
+}
+.JewelImgSlider img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

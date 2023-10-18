@@ -1,0 +1,25 @@
+.secondJewellerySlider {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+  gap: 1rem;
+  position: relative;
+}
+
+.secondJewellerySlider aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 10px;
+  flex-shrink: 100;
+}
+.secondJewellerySlider aside h1 {
+  color: white;
+}
+.secondJewellerySlider aside p {
+  color: rgb(138, 138, 138);
+}
+.secondJewellerySlider .swiper {
+  flex-basis: 80%;
+}

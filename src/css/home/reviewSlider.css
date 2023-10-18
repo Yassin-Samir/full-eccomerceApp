@@ -1,0 +1,23 @@
+.swiper.reviewSlider {
+  min-height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://cdn.shopify.com/s/files/1/0658/5116/2929/files/testi_bg_1920x.png);
+  background-color: rgb(232, 168, 110);
+  margin-top: 50px;
+  color: white;
+}
+
+.ReviewSlide {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  user-select: none;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.swiper.reviewSlider .swiper-pagination-bullet {
+  background-color: black;
+  margin: 0 12px !important;
+}

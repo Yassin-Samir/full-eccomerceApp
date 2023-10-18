@@ -1,0 +1,88 @@
+.swiper:has(.UpperSlide) {
+  height: 50vh;
+}
+.UpperSlide {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.UpperSlide img {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+}
+.swiper:has(.UpperSlide) .swiper-pagination-bullet {
+  background-color: rgb(232, 168, 110);
+}
+.swiper-slide-active:has(.UpperSlide) .slideText {
+  top: 35%;
+  transition: top 0.4s 0.35s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition: top 0.4s 0.35s cubic-bezier(0, 0, 0.2, 1);
+  -moz-transition: top 0.4s 0.35s cubic-bezier(0, 0, 0.2, 1);
+  -ms-transition: top 0.4s 0.35s cubic-bezier(0, 0, 0.2, 1);
+  -o-transition: top 0.4s 0.35s cubic-bezier(0, 0, 0.2, 1);
+}
+.UpperSlide .slideText {
+  color: white;
+  right: 13%;
+  top: -60%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.UpperSlide .slideText h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.UpperSlide .slideText p {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+.UpperSlide .slideText a {
+  margin-top: 10px;
+}
+.swiper .firstSlider-prev-button,
+.swiper .firstSlider-next-button {
+  position: absolute;
+  top: 50%;
+  z-index: 100000000000;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transform: scale(2) translateY(-50%);
+  -webkit-transform: scale(2) translateY(-50%);
+  -moz-transform: scale(2) translateY(-50%);
+  -ms-transform: scale(2) translateY(-50%);
+  -o-transform: scale(2) translateY(-50%);
+  opacity: 0.5;
+}
+.swiper .firstSlider-prev-button:hover,
+.swiper .firstSlider-next-button:hover {
+  opacity: 1;
+}
+.swiper .firstSlider-prev-button path,
+.swiper .firstSlider-next-button path {
+  fill: white;
+}
+.swiper .firstSlider-prev-button {
+  left: 2%;
+}
+.swiper .firstSlider-next-button {
+  right: 1%;
+}
+@media only screen and (max-width: 620px) {
+  .UpperSlide .slideText h1 {
+    font-size: 2rem;
+  }
+  .UpperSlide .slideText {
+    right: 5%;
+  }
+
+  .swiper .firstSlider-prev-button,
+  .swiper .firstSlider-next-button {
+    display: none;
+  }
+}

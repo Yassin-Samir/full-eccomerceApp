@@ -1,0 +1,27 @@
+.jewelPage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding: 0 15px;
+  color: #8a8a8a;
+}
+
+.jewelPage hr {
+  border: 1px solid #434343;
+}
+
+.jewelPage .jewelProps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.jewelPage .jewelProps .brand {
+  font-size: 1rem;
+}
+.jewelPage .jewelProps .JewelName {
+  color: white;
+}

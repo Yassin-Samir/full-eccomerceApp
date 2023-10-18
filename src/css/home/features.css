@@ -1,0 +1,24 @@
+.Features {
+  display: grid;
+  width: 90%;
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 50px;
+}
+.feature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(138, 138, 138);
+  height: 10vh;
+  gap: 10px;
+}
+.feature-text h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+.feature-text .feature-text h1:hover {
+  color: rgb(232, 168, 110);
+}
