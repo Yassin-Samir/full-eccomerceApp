@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 function UrlPath() {
   const { pathname } = useLocation();
-  console.log({ pathname });
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
