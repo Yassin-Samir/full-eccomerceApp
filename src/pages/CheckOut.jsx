@@ -141,7 +141,7 @@ function CheckOut() {
               variant="contained"
               color="primary"
               size="large"
-              disabled={!isValid || !dirty}
+              disabled={!cartItems.length || !isValid || !dirty}
               loading={isSubmitting}
             >
               Checkout
