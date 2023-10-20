@@ -7,7 +7,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 function ImgSlider({ jewelImgs }) {
   const { jewel } = useParams();
-  useEffect(() => setCurrentImg(jewelImgs[0]), [jewel]);
+  useEffect(() => {
+    setCurrentImg(jewelImgs[0]);
+  }, [jewel]);
   const [CurrentImg, setCurrentImg] = useState("");
   return (
     <div className="JewelImgSlider">

@@ -5,10 +5,11 @@ function UrlPath() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const Path = pathname.split("/")[pathname.split("/").length - 1];
+  const SeparatedRoutesArr = pathname.split("/").filter((route) => route);
+  const Path = SeparatedRoutesArr[SeparatedRoutesArr.length - 1];
   return pathname === "/" ? null : (
     <div className="UrlPath">
-      <Link to={"/"}>Home</Link> /{" "}
+      <Link to={"/"}>Home</Link> /
       <span className="active"> {Path.replace(/%20/gi, " ")}</span>
     </div>
   );

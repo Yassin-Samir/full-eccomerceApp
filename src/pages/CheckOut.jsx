@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { object, string } from "yup";
 import { checkOut as CheckoutAction } from "../redux/slices/cart";
 import { CartSelector, UserSelector } from "../redux/selectors";
-import { TextField } from "@mui/material";
+import { Box, TextField, Tooltip } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 const validationSchema = object({
   FirstName: string().required("required"),
@@ -25,10 +23,6 @@ function CheckOut() {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(CartSelector);
   const { LoggedIn, user } = useSelector(UserSelector);
-  const navigate = useNavigate();
-  useEffect(() => {
-    !LoggedIn ? navigate("/") : null;
-  }, [LoggedIn]);
   const handleSubmit = (values, { setSubmitting }) => {
     dispatch(
       CheckoutAction({
@@ -136,16 +130,39 @@ function CheckOut() {
               helperText={Boolean(touched.ZipCode) && errors.ZipCode}
               sx={textFieldStyles}
             />
-            <LoadingButton
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-              disabled={!cartItems.length || !isValid || !dirty}
-              loading={isSubmitting}
+            <Tooltip
+              title={
+                !LoggedIn
+                  ? "Please Login first"
+                  : !cartItems.length
+                  ? "Please add Items in your cart"
+                  : !isValid
+                  ? "Please Fill in the form"
+                  : null
+              }
+              arrow
+              placement="top"
+              enterTouchDelay={0}
             >
-              Checkout
-            </LoadingButton>
+              <Box
+                component={"span"}
+                sx={{
+                  cursor: !LoggedIn ? "not-allowed" : "initial",
+                }}
+              >
+                <LoadingButton
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  disabled={!cartItems.length || !isValid || !dirty}
+                  loading={isSubmitting}
+                  sx={{ width: "100%" }}
+                >
+                  Checkout
+                </LoadingButton>
+              </Box>
+            </Tooltip>
           </Form>
         )}
       </Formik>
