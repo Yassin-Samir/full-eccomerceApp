@@ -22,7 +22,7 @@ function Nav() {
               "https://cdn.shopify.com/s/files/1/0658/5116/2929/files/jewellery-store-logo-1630986930.png"
             }
             alt="logo"
-            loading="lazy"
+            loading="eager"
           />
         </Link>
       </div>
@@ -184,8 +184,11 @@ function Cart() {
             CHECKOUT
           </Button>
         ) : null}
-        <div className={`cartBackdrop`}></div>
       </div>
+      <div
+        className={`CartBackdrop ${Open ? "Open" : ""}`}
+        onClick={() => setOpen(false)}
+      ></div>
     </>
   );
 }

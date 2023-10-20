@@ -56,7 +56,7 @@ function FirstSlider() {
 function Slide({ text, title, img }) {
   return (
     <div className="UpperSlide">
-      <img src={img} loading="lazy" alt="" />
+      <img src={img} loading="eager" alt="" />
       <div className="slideText">
         <h1>{title}</h1>
         <p>{text}</p>

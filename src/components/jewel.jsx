@@ -15,7 +15,7 @@ function Jewel({ src, name, brand, price, priceId }) {
             className={Hovered ? "JewelHovered" : ""}
             src={src[Hovered ? 0 : 1]}
             alt=""
-            loading="lazy"
+            loading="eager"
           />
         </div>
         <h1>{brand}</h1>

@@ -71,7 +71,7 @@ function BlogPosts() {
 function BlogPost({ Image }) {
   return (
     <div className="BlogPost">
-      <img src={Image} alt="" loading="lazy" />
+      <img src={Image} alt="" loading="eager" />
       <div>
         <h2>November 17, 2022</h2>
         <p className="header">Browse Through More Products Of Classic.</p>

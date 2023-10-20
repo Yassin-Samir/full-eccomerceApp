@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 function CheckOutCollection() {
   return (
     <section className="CheckOutCollection">
-      <img loading="lazy" src={Image1} alt="two rings" />
+      <img loading="eager" src={Image1} alt="two rings" />
       <div>
-        <img loading="lazy" src={Image2} alt="golden ring" />
+        <img loading="eager" src={Image2} alt="golden ring" />
         <div>
           <h1>Check Out Our Collections</h1>
           <p>

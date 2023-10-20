@@ -79,7 +79,7 @@ function JewelProps({ jewelItem }) {
         </Stack>
       </Stack>
       <Tooltip
-        title="please login first"
+        title={!isLoggedIn ? "please login first" : ""}
         disableHoverListener={isLoggedIn}
         arrow
         placement="top"

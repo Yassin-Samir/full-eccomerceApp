@@ -73,7 +73,7 @@ function BrandsSlider() {
 function Brand({ Image }) {
   return (
     <div className="brand">
-      <img src={Image} loading="lazy" alt="" />
+      <img src={Image} loading="eager" alt="" />
     </div>
   );
 }

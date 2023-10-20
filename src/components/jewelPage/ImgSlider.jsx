@@ -13,7 +13,7 @@ function ImgSlider({ jewelImgs }) {
   const [CurrentImg, setCurrentImg] = useState("");
   return (
     <div className="JewelImgSlider">
-      <img src={CurrentImg} loading="lazy" />
+      <img src={CurrentImg} loading="eager" />
       <Swiper
         modules={[Navigation, Controller, Pagination]}
         onSlideChange={({ realIndex }) => {
