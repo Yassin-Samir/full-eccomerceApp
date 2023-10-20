@@ -24,6 +24,7 @@ function CheckOut() {
   const { cartItems } = useSelector(CartSelector);
   const { LoggedIn, user } = useSelector(UserSelector);
   const handleSubmit = (values, { setSubmitting }) => {
+    setSubmitting(true);
     dispatch(
       CheckoutAction({
         lineItems: cartItems.map((item) => ({
@@ -33,7 +34,6 @@ function CheckOut() {
         email: user.email,
       })
     );
-    setSubmitting(false);
   };
   return (
     <div
@@ -136,7 +136,7 @@ function CheckOut() {
                   ? "Please Login first"
                   : !cartItems.length
                   ? "Please add Items in your cart"
-                  : !isValid
+                  : !isValid || !dirty
                   ? "Please Fill in the form"
                   : null
               }
