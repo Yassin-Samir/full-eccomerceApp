@@ -83,6 +83,7 @@ function JewelProps({ jewelItem }) {
         disableHoverListener={isLoggedIn}
         arrow
         placement="top"
+        enterTouchDelay={0}
       >
         <Box
           component={"span"}
