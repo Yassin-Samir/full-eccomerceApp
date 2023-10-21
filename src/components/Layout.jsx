@@ -5,13 +5,22 @@ import { auth } from "../firebase";
 import { fetchJewellery } from "../redux/slices/jewellery";
 import { LogIn, LogOut } from "../redux/slices/credentials";
 import { jewellerySelector } from "../redux/selectors";
+import { ThemeProvider, createTheme } from "@mui/material";
 import Nav from "./Nav";
 import UrlPath from "./UrlPath";
 import LoadingComponent from "./Loading";
 import Footer from "./footer";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "rgb(232, 168, 110)",
+    },
+  },
+});
 function Layout() {
   const dispatch = useDispatch();
+
   const { jewels, Loading } = useSelector(jewellerySelector);
   useEffect(() => {
     !jewels ? dispatch(fetchJewellery()) : null;
@@ -23,7 +32,7 @@ function Layout() {
     return unListen;
   }, []);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <header>
         <Nav />
       </header>
@@ -40,7 +49,7 @@ function Layout() {
       <footer>
         <Footer />
       </footer>
-    </>
+    </ThemeProvider>
   );
 }
 
