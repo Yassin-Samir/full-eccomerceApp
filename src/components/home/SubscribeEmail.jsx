@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import React from "react";
 
 function SubscribeEmail() {
@@ -5,8 +6,8 @@ function SubscribeEmail() {
     <div className="subscriptionField">
       <h1>Subscribe to our emails</h1>
       <div>
-        <input type="text" placeholder="Email" />
-        <button className="shopNowBtn">Subscribe</button>
+        <TextField name="Email" type="text" variant="outlined" label="Email" />
+        <Button variant="contained">Subscribe</Button>
       </div>
     </div>
   );

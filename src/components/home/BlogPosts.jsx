@@ -2,6 +2,7 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Button } from "@mui/material";
 import Image1 from "../../assets/3.jpg";
 import Image2 from "../../assets/4.jpg";
 import Image3 from "../../assets/11.jpg";
@@ -80,7 +81,7 @@ function BlogPost({ Image }) {
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s
         </p>
-        <button className="readMoreBtn">Read More</button>
+        <Button variant="contained">Read More</Button>
       </div>
     </div>
   );

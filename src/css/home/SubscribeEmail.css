@@ -17,16 +17,5 @@
   flex-grow: 1;
 }
 .subscriptionField input {
-  border: none;
-  outline: none;
-  width: 100%;
-  caret-color: rgb(67, 67, 67);
-  color: rgb(67, 67, 67);
-  height: 42px;
-  padding: 0 10px;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  color: white !important;
 }
