@@ -18,19 +18,15 @@
   text-transform: capitalize;
   font-size: 2rem;
 }
-.mainDisplay p {
-  align-self: flex-start;
-}
 .mainDisplay .ShopJewels {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
   gap: 1rem;
   justify-content: center;
   align-content: space-between;
+  width: 90%;
+  margin: 0 auto;
 }
 .mainDisplay .ShopJewels .jewel {
   width: 100%;
-}
-.mainDisplay .ShopJewels a:has(.jewel) {
-  flex-basis: calc(100% / 5);
 }

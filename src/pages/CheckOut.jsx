@@ -12,10 +12,10 @@ const validationSchema = object({
   streetAddress: string().required("required"),
   City: string().required("required"),
   ZipCode: string()
+    .required("required")
     .matches(/^\d{5}(?:[-\s]\d{4})?$/, {
       message: "Please add a valid zip code",
-    })
-    .required("required"),
+    }),
 });
 const textFieldStyles = {
   input: { color: "white" },
@@ -124,7 +124,7 @@ function CheckOut() {
             />
             <Field
               name={"ZipCode"}
-              type={"number"}
+              type={"text"}
               as={TextField}
               label={"ZipCode"}
               variant={"outlined"}

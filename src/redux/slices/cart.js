@@ -18,6 +18,8 @@ export const checkOut = createAsyncThunk("cart/Checkout", async (action) => {
   });
   return null;
 });
+const CalculateTotal = (accumulator, { price, quantity }) =>
+  (accumulator += price * quantity);
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -32,10 +34,7 @@ const cartSlice = createSlice({
       );
       if (JewelIndex === -1) return;
       state.cartItems[JewelIndex].quantity++;
-      state.total = state.cartItems.reduce(
-        (accumulator, { price, quantity }) => (accumulator += price * quantity),
-        0
-      );
+      state.total = state.cartItems.reduce(CalculateTotal, 0);
     },
     decrement(state, action) {
       const JewelIndex = state.cartItems.findIndex(
@@ -47,19 +46,13 @@ const cartSlice = createSlice({
             ({ name }) => name !== action.payload.name
           ))
         : state.cartItems[JewelIndex].quantity--;
-      state.total = state.cartItems.reduce(
-        (accumulator, { price, quantity }) => (accumulator += price * quantity),
-        0
-      );
+      state.total = state.cartItems.reduce(CalculateTotal, 0);
     },
     remove(state, action) {
       state.cartItems = state.cartItems.filter(
         ({ name }) => name !== action.payload.name
       );
-      state.total = state.cartItems.reduce(
-        (accumulator, { price, quantity }) => (accumulator += price * quantity),
-        0
-      );
+      state.total = state.cartItems.reduce(CalculateTotal, 0);
     },
   },
   extraReducers(builder) {
@@ -70,12 +63,11 @@ const cartSlice = createSlice({
       state.isAddingItem = false;
       if (
         state.cartItems.findIndex(
-          ({ brand }) => brand === action.payload.brand
+          ({ name }) => name === action.payload.name
         ) === -1
       )
         state.cartItems = [...state.cartItems, action.payload];
-      state.total =
-        state.total + action.payload.price * action.payload.quantity;
+      state.total = state.cartItems.reduce(CalculateTotal, 0);
     });
   },
 });

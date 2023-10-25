@@ -1,6 +1,19 @@
 import { useState } from "react";
-import { Slider } from "@mui/material";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Checkbox,
+  Typography,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Slider,
+  Button,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 const brands = [
   "Xara",
   "Tanishq",
@@ -12,74 +25,162 @@ const brands = [
 ];
 const colors = ["Silver", "Gold", "Black"];
 function FilterBrands({ EditFilters, searchParams }) {
-  const [Open, setOpen] = useState(false);
   const Brands = searchParams || [];
-  const addFilter = ({ target: { value, checked } }) => {
+  const addFilter = (value) => () => {
     EditFilters((prev) => ({
       ...prev,
-      BRAND: checked
-        ? [...prev.BRAND, value]
-        : prev.BRAND?.filter((brand) => brand !== value),
+      BRAND:
+        prev.BRAND?.findIndex((brand) => brand === value) === -1
+          ? [...prev.BRAND, value]
+          : prev.BRAND?.filter((brand) => brand !== value),
     }));
   };
   return (
-    <div className={`filterMenu ${Open ? "Open" : ""}`}>
-      <div className="header" onClick={() => setOpen((prev) => !prev)}>
-        <p>Brand</p>
-        <ArrowDownwardIcon
+    <Accordion>
+      <AccordionSummary
+        sx={{
+          "& .MuiAccordionSummary-content": {
+            gap: "0.5rem",
+            alignItems: "center",
+          },
+        }}
+        expandIcon={
+          <ExpandMoreIcon
+            sx={{
+              fontSize: "1.1rem",
+            }}
+          />
+        }
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography
+          variant="body1"
           sx={{
-            transition: "transform 0.5s linear",
-            transform: Open ? "rotate(180deg)" : "",
+            ml: 2,
+            color: "white",
           }}
-        />
-      </div>
-      <ul className="brandFilters">
-        {brands &&
-          brands.map((brand, ind) => (
-            <li key={ind + 1}>
-              <input
-                type="checkbox"
-                checked={
-                  Brands.findIndex((searchBrand) => searchBrand === brand) !==
-                  -1
-                }
-                onChange={addFilter}
-                value={brand}
-                id={brand}
-              />
-              <label htmlFor={brand}>{brand}</label>
-            </li>
-          ))}
-      </ul>
-    </div>
+        >
+          Brand
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <List
+          sx={{
+            pt: 0,
+            pl: "8px",
+          }}
+        >
+          {brands.map((value, index) => {
+            const labelId = `checkbox-list-label-${index}`;
+            return (
+              <ListItem
+                key={index}
+                disableGutters
+                disablePadding
+                sx={{
+                  "& .MuiButtonBase-root.MuiListItemButton-root": {
+                    py: 0.3,
+                    "&:hover": {
+                      backgroundColor: "inherit !important",
+                    },
+                  },
+                  "& .MuiListItemIcon-root": {
+                    minWidth: "auto",
+                  },
+                  "& span": {
+                    py: 0,
+                  },
+                }}
+              >
+                <ListItemButton onClick={addFilter(value)} dense disableRipple>
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={
+                        Brands.findIndex(
+                          (searchBrand) => searchBrand === value
+                        ) !== -1
+                      }
+                      tabIndex={-1}
+                      disableRipple
+                      inputProps={{ "aria-labelledby": labelId }}
+                      size={"small"}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    id={labelId}
+                    primary={
+                      <Typography
+                        variant="body2"
+                        color={"text.secondary"}
+                        fontWeight={600}
+                        sx={{
+                          "&:hover": {
+                            color: "primary.main",
+                          },
+                        }}
+                      >
+                        {value}
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 function FilterPrice({ EditFilters, searchParams }) {
-  const [Open, setOpen] = useState(false);
   const [Price, setPrice] = useState(
     searchParams
       ? searchParams.split("-").map((Price) => Number(Price))
       : [500, 950]
   );
-  const handleChange = (event, value) => {
-    setPrice(value);
-  };
+  const handleChange = (event, value) => setPrice(value);
+  const FilterPrice = () => EditFilters((prev) => ({ ...prev, PRICE: Price }));
 
-  const FilterPrice = () => {
-    EditFilters((prev) => ({ ...prev, PRICE: Price }));
-  };
   return (
-    <div className={`filterMenu ${Open ? "Open" : ""}`}>
-      <div className="header" onClick={() => setOpen((prev) => !prev)}>
-        <p>Price</p>
-        <ArrowDownwardIcon
+    <Accordion>
+      <AccordionSummary
+        sx={{
+          "& .MuiAccordionSummary-content": {
+            gap: "0.5rem",
+            alignItems: "center",
+          },
+        }}
+        expandIcon={
+          <ExpandMoreIcon
+            sx={{
+              fontSize: "1.1rem",
+            }}
+          />
+        }
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography
+          variant="body1"
           sx={{
-            transition: "transform 0.5s linear",
-            transform: Open ? "rotate(180deg)" : "",
+            ml: 2,
+            color: "white",
           }}
-        />
-      </div>
-      <div className="PriceSlider">
+        >
+          Price
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Slider
           getAriaLabel={() => "Price range"}
           value={Price}
@@ -90,58 +191,133 @@ function FilterPrice({ EditFilters, searchParams }) {
           sx={{
             width: "90%",
             color: "rgb(232, 168, 110)",
-            alignSelf: "center",
+            margin: "auto",
           }}
         />
-        <p style={{ alignSelf: "center" }}>{Price.join(" - ")}</p>
-        <button className="filterPriceBtn" onClick={FilterPrice}>
+        <Typography
+          style={{
+            textAlign: "center",
+            color: "text.primary",
+            fontSize: "2rem",
+          }}
+        >
+          {Price.join(" - ")}
+        </Typography>
+        <Button variant="outlined" sx={{ width: "100%" }} onClick={FilterPrice}>
           Filter
-        </button>
-      </div>
-    </div>
+        </Button>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 function FilterColor({ EditFilters, searchParams }) {
-  const [Open, setOpen] = useState(false);
   const Colors = searchParams || [];
-  const addFilter = ({ target: { checked, value } }) => {
+  const addFilter = (value) => () => {
     EditFilters((prev) => ({
       ...prev,
-      COLOR: checked
-        ? [...prev.COLOR, value]
-        : prev.COLOR.filter((color) => color !== value),
+      COLOR:
+        prev.COLOR.findIndex((color) => color === value) === -1
+          ? [...prev.COLOR, value]
+          : prev.COLOR.filter((color) => color !== value),
     }));
   };
   return (
-    <div className={`filterMenu ${Open ? "Open" : ""}`}>
-      <div className="header" onClick={() => setOpen((prev) => !prev)}>
-        <p>Color</p>
-        <ArrowDownwardIcon
+    <Accordion>
+      <AccordionSummary
+        sx={{
+          "& .MuiAccordionSummary-content": {
+            gap: "0.5rem",
+            alignItems: "center",
+          },
+        }}
+        expandIcon={
+          <ExpandMoreIcon
+            sx={{
+              fontSize: "1.1rem",
+            }}
+          />
+        }
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography
+          variant="body1"
           sx={{
-            transition: "transform 0.5s linear",
-            transform: Open ? "rotate(180deg)" : "",
+            ml: 2,
+            color: "white",
           }}
-        />
-      </div>
-      <ul>
-        {colors &&
-          colors.map((Color, ind) => (
-            <li key={ind + 1}>
-              <input
-                type="checkbox"
-                checked={
-                  Colors.findIndex((searchColor) => searchColor === Color) !==
-                  -1
-                }
-                onChange={addFilter}
-                value={Color}
-                id={Color}
-              />
-              <label htmlFor={Color}>{Color}</label>
-            </li>
-          ))}
-      </ul>
-    </div>
+        >
+          Color
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <List
+          sx={{
+            pt: 0,
+            pl: "8px",
+          }}
+        >
+          {colors.map((value, index) => {
+            const labelId = `checkbox-list-label-Color-${index}`;
+            return (
+              <ListItem
+                key={index}
+                disableGutters
+                disablePadding
+                sx={{
+                  "& .MuiButtonBase-root.MuiListItemButton-root": {
+                    py: 0.3,
+                    "&:hover": {
+                      backgroundColor: "inherit !important",
+                    },
+                  },
+                  "& .MuiListItemIcon-root": {
+                    minWidth: "auto",
+                  },
+                  "& span": {
+                    py: 0,
+                  },
+                }}
+              >
+                <ListItemButton onClick={addFilter(value)} dense disableRipple>
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={
+                        Colors.findIndex(
+                          (searchBrand) => searchBrand === value
+                        ) !== -1
+                      }
+                      tabIndex={-1}
+                      disableRipple
+                      inputProps={{ "aria-labelledby": labelId }}
+                      size={"small"}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    id={labelId}
+                    primary={
+                      <Typography
+                        variant="body2"
+                        color={"text.secondary"}
+                        fontWeight={600}
+                        sx={{
+                          "&:hover": {
+                            color: "primary.main",
+                          },
+                        }}
+                      >
+                        {value}
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 export { FilterBrands, FilterColor, FilterPrice };

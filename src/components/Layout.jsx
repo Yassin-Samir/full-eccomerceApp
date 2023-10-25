@@ -16,6 +16,14 @@ const theme = createTheme({
     primary: {
       main: "rgb(232, 168, 110)",
     },
+    background: {
+      default: "#2b2b2b",
+      paper: "#2b2b2b",
+    },
+    text: {
+      secondary: "#8a8a8a",
+      primary: "rgb(232, 168, 110)",
+    },
   },
 });
 function Layout() {
