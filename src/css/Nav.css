@@ -36,7 +36,7 @@ nav ul {
 
 nav .tabletNavBackdrop,
 nav .tabletNav {
-  position: absolute;
+  position: fixed;
   height: 100vh;
   top: 109px;
   transition: 0.2s linear;
@@ -92,7 +92,7 @@ nav .tabletNav ul li:hover {
 nav .CartBackdrop,
 nav .Cart {
   height: 100vh;
-  position: absolute;
+  position: fixed;
   transition: 0.2s linear;
   -webkit-transition: 0.2s linear;
   -moz-transition: 0.2s linear;
@@ -179,9 +179,6 @@ nav .Cart .cartItem .ImgContainer {
   nav .Cart {
     z-index: -1;
     width: 70vw;
-  }
-  nav .CartBackdrop {
-    width: 30vw;
   }
   nav .CartBackdrop {
     width: 30vw;

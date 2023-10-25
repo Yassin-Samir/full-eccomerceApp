@@ -22,10 +22,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
   gap: 1rem;
-  justify-content: center;
-  align-content: space-between;
+  justify-items: center;
   width: 90%;
   margin: 0 auto;
+}
+.mainDisplay .ShopJewels > a {
+  max-width: 185px;
+  max-height: 400px;
 }
 .mainDisplay .ShopJewels .jewel {
   width: 100%;
