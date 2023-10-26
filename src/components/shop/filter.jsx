@@ -18,13 +18,13 @@ function Filter() {
   useEffect(() => {
     const SearchParams = new URLSearchParams();
     Filters.BRAND.length &&
-      Filters.BRAND.map((brand) => {
+      Filters.BRAND.forEach((brand) => {
         SearchParams.append("BRAND", brand);
       });
     Filters.PRICE.length &&
       SearchParams.append("PRICE", Filters.PRICE.join("-"));
     Filters.COLOR.length &&
-      Filters.COLOR.map((color) => SearchParams.append("COLOR", color));
+      Filters.COLOR.forEach((color) => SearchParams.append("COLOR", color));
     setSearchParams(SearchParams);
     dispatch(filter());
   }, [Filters]);

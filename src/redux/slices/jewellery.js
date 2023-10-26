@@ -64,12 +64,12 @@ const jewellery = createSlice({
   },
 });
 const colorsFilterHelper = (data, filters, item) => {
-  let isMatching = false;
-  data[item]["colors"].forEach((color) => {
-    if (filters.indexOf(color) === -1) return;
-    isMatching = true;
-  });
-  return isMatching;
+  for (let index = 0; index < data[item]["colors"].length; index++) {
+    const color = data[item]["colors"][index];
+    if (filters.indexOf(color) === -1) continue;
+    return true;
+  }
+  return false;
 };
 export const { filter } = jewellery.actions;
 export default jewellery.reducer;
