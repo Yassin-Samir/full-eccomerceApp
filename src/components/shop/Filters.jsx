@@ -24,8 +24,7 @@ const brands = [
   "Spike",
 ];
 const colors = ["Silver", "Gold", "Black"];
-function FilterBrands({ EditFilters, searchParams }) {
-  const Brands = searchParams || [];
+function FilterBrands({ EditFilters, searchParams: Brands }) {
   const addFilter = (value) => () => {
     EditFilters((prev) => ({
       ...prev,
@@ -210,8 +209,7 @@ function FilterPrice({ EditFilters, searchParams }) {
     </Accordion>
   );
 }
-function FilterColor({ EditFilters, searchParams }) {
-  const Colors = searchParams || [];
+function FilterColor({ EditFilters, searchParams: Colors }) {
   const addFilter = (value) => () => {
     EditFilters((prev) => ({
       ...prev,

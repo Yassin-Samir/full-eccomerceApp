@@ -10,9 +10,9 @@ function Filter() {
   const PRICE = searchParams.get("PRICE");
   const Color = searchParams.getAll("COLOR");
   const [Filters, setFilters] = useState({
-    BRAND: BRANDS || [],
+    BRAND: BRANDS,
     PRICE: PRICE ? PRICE.split("-") : [],
-    COLOR: Color || [],
+    COLOR: Color,
   });
   const dispatch = useDispatch();
   useEffect(() => {

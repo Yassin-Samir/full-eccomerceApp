@@ -24,39 +24,27 @@ const jewellery = createSlice({
   },
   reducers: {
     filter(state) {
-      const brandsFilters = new URLSearchParams(location.search).getAll(
-        "BRAND"
-      );
-      const priceFilters =
-        new URLSearchParams(location.search).getAll("PRICE").length > 0
-          ? new URLSearchParams(location.search).getAll("PRICE")[0].split("-")
-          : [];
-
-      const colorsFilters = new URLSearchParams(location.search).getAll(
-        "COLOR"
-      );
-
+      const SearchParams = new URLSearchParams(location.search);
+      const brandsFilters = SearchParams.getAll("BRAND");
+      const priceFilters = SearchParams.get("PRICE")
+        ? SearchParams.get("PRICE").split("-")
+        : [];
+      const colorsFilters = SearchParams.getAll("COLOR");
       let filteredItems = Object.entries(state.jewels);
-
       brandsFilters.length &&
         (filteredItems = filteredItems.filter(
-          (item) =>
-            brandsFilters.indexOf(state.jewels[`${item[0]}`]["brand"]) !== -1
+          (item) => brandsFilters.indexOf(state.jewels[item[0]]["brand"]) !== -1
         ));
-
       priceFilters.length &&
         (filteredItems = filteredItems.filter(
           (item) =>
-            +state.jewels[`${item[0]}`]["price"] >= +priceFilters[0] &&
-            +state.jewels[`${item[0]}`]["price"] <= +priceFilters[1]
+            +state.jewels[item[0]]["price"] >= +priceFilters[0] &&
+            +state.jewels[item[0]]["price"] <= +priceFilters[1]
         ));
-
       colorsFilters.length &&
-        (filteredItems = filteredItems.filter(
-          (item) =>
-            colorsFilterHelper(state.jewels, colorsFilters, item[0]) != false
+        (filteredItems = filteredItems.filter((item) =>
+          colorsFilterHelper(state.jewels, colorsFilters, item[0])
         ));
-
       state.previewedJewels = Object.fromEntries(filteredItems);
     },
   },
@@ -77,10 +65,9 @@ const jewellery = createSlice({
 });
 const colorsFilterHelper = (data, filters, item) => {
   let isMatching = false;
-  data[`${item}`]["colors"].forEach((color) => {
-    if (filters.indexOf(color) !== -1) {
-      isMatching = true;
-    }
+  data[item]["colors"].forEach((color) => {
+    if (filters.indexOf(color) === -1) return;
+    isMatching = true;
   });
   return isMatching;
 };

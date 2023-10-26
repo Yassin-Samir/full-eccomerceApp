@@ -25,11 +25,11 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import Success from './pages/success'
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Jewel = lazy(() => import("./pages/Jewel"));
 const CheckOut = lazy(() => import("./pages/CheckOut"));
-const Success = lazy(() => import("./pages/success"));
 const router = createBrowserRouter([
   {
     path: "/",
