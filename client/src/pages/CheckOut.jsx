@@ -1,9 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { object, string } from "yup";
-import { checkOut as CheckoutAction } from "../redux/slices/cart";
+import { CheckoutAction } from "../redux/slices/cart";
 import { CartSelector, UserSelector } from "../redux/selectors";
-import { Box, TextField, Tooltip } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 const validationSchema = object({
   FirstName: string().required("required"),
@@ -23,10 +30,9 @@ const textFieldStyles = {
 };
 function CheckOut() {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector(CartSelector);
+  const { cartItems, error, IsLoading } = useSelector(CartSelector);
   const { LoggedIn, user } = useSelector(UserSelector);
-  const handleSubmit = (values, { setSubmitting }) => {
-    setSubmitting(true);
+  const handleSubmit = () => {
     dispatch(
       CheckoutAction({
         lineItems: cartItems.map((item) => ({
@@ -58,7 +64,7 @@ function CheckOut() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, isValid, touched, dirty, isSubmitting }) => (
+        {({ errors, isValid, touched, dirty }) => (
           <Form
             style={{
               display: "flex",
@@ -152,16 +158,23 @@ function CheckOut() {
                   cursor: !LoggedIn ? "not-allowed" : "initial",
                 }}
               >
+                {error ? (
+                  <Alert severity="error" sx={{ marginBottom: "20px" }}>
+                    <AlertTitle>Error</AlertTitle>
+                    {error}
+                  </Alert>
+                ) : null}
+
                 <LoadingButton
                   type="submit"
                   variant="contained"
                   color="primary"
                   size="large"
                   disabled={!cartItems.length || !isValid || !dirty}
-                  loading={isSubmitting}
+                  loading={IsLoading}
                   sx={{ width: "100%" }}
                 >
-                  Checkout
+                  {!error ? "Checkout" : "Try Again"}
                 </LoadingButton>
               </Box>
             </Tooltip>

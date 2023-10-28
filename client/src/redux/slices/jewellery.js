@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 export const fetchJewellery = createAsyncThunk(
   "jewellery/fetchJewellery",
   async () => {
     try {
       const jewelleryPromise = fetch(
-        "https://jewellery--store-default-rtdb.europe-west1.firebasedatabase.app/data.json"
+        "https://jewelery-store-5aceb-default-rtdb.europe-west1.firebasedatabase.app/data.json"
       );
       return await (await jewelleryPromise).json();
     } catch (error) {

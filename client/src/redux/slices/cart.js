@@ -1,23 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loadStripe } from "@stripe/stripe-js";
 export const addItem = createAsyncThunk("cart/addItem", async (action) => {
   await new Promise((res, rej) => setTimeout(res, 1500));
   return action;
 });
-const stripePromise = loadStripe(
-  "pk_test_51MW4YXAQqTLhXS8keuq7k5CBqJFUdiptkXELRmCUUE4ti3jlZYPE309w5DAc4usOf3lQx7BC7wJx4W70uwPCcTQJ00j5wqVa4t"
+export const CheckoutAction = createAsyncThunk(
+  "cart/Checkout",
+  async (action) => {
+    try {
+      const getCheckoutUrl = await (
+        await fetch("http://localhost:4242/api/checkoutSession", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            line_items: action.lineItems,
+            success_url: `${window.location.origin}/checkout/success`,
+            cancel_url: window.location.origin,
+            customer_email: action.email,
+          }),
+        })
+      ).json();
+      window.location.href = getCheckoutUrl.url;
+    } catch (error) {
+      throw error.message;
+    }
+    return null;
+  }
 );
-export const checkOut = createAsyncThunk("cart/Checkout", async (action) => {
-  const Stripe = await stripePromise;
-  Stripe.redirectToCheckout({
-    mode: "payment",
-    lineItems: action.lineItems,
-    successUrl: `${window.location.origin}/checkout/success`,
-    cancelUrl: window.location.origin,
-    customerEmail: action.email,
-  });
-  return null;
-});
 const CalculateTotal = (accumulator, { price, quantity }) =>
   (accumulator += price * quantity);
 const cartSlice = createSlice({
@@ -26,6 +36,8 @@ const cartSlice = createSlice({
     cartItems: [],
     isAddingItem: false,
     total: 0,
+    error: "",
+    IsLoading: false,
   },
   reducers: {
     increment(state, action) {
@@ -68,6 +80,13 @@ const cartSlice = createSlice({
       )
         state.cartItems = [...state.cartItems, action.payload];
       state.total = state.cartItems.reduce(CalculateTotal, 0);
+    });
+    builder.addCase(CheckoutAction.pending, (state, action) => {
+      state.IsLoading = true;
+    });
+    builder.addCase(CheckoutAction.rejected, (state, action) => {
+      state.IsLoading = false;
+      state.error = action.error.message;
     });
   },
 });

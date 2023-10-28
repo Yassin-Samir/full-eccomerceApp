@@ -13,13 +13,13 @@ function UrlPath() {
     <HelmetProvider>
       <Helmet>
         <title>
-          {pathname === "/" ? "Jewellery Store" : Path.replace(/%20/gi, " ")}
+          {pathname === "/" ? "Jewellery Store" : decodeURIComponent(Path)}
         </title>
       </Helmet>
       {pathname === "/" ? null : (
         <div className="UrlPath">
           <Link to={"/"}>Home</Link> /
-          <span className="active">{Path.replace(/%20/gi, " ")}</span>
+          <span className="active">{decodeURIComponent(Path)}</span>
         </div>
       )}
     </HelmetProvider>

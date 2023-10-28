@@ -46,5 +46,10 @@ export const UserSelector = createSelector(
 );
 export const CartSelector = createSelector(
   ({ cart }) => cart,
-  ({ cartItems, total }) => ({ cartItems, total })
+  ({ cartItems, total, error, IsLoading }) => ({
+    cartItems,
+    total,
+    error,
+    IsLoading,
+  })
 );
