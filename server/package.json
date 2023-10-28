@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon api.js",
     "listenStripe": "stripe listen --forward-to localhost:4242/webhook"
