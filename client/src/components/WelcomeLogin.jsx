@@ -1,11 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 function WelcomeUser({ user }) {
+  const Navigate = useNavigate();
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      Navigate({ to: "/" });
+      Navigate("/");
     } catch (error) {
       console.log({ error });
     }

@@ -247,7 +247,7 @@ function CartItem({ brand, price, quantity, name, src }) {
           }}
           onClick={() => dispatch(remove({ name }))}
         />
-        <p>{price}</p>
+        <p>${price}</p>
       </div>
     </div>
   );

@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 const JewelleryApp = initializeApp({
-  apiKey: "AIzaSyAAn75zHrG4LLGfuw37VZF_Uf_fiarbAiU",
-  authDomain: "jewelery-store-5aceb.firebaseapp.com",
-  projectId: "jewelery-store-5aceb",
-  storageBucket: "jewelery-store-5aceb.appspot.com",
-  messagingSenderId: "735259458263",
-  appId: "1:735259458263:web:bf55347259e1354cc40e92",
+  apiKey: "AIzaSyBfGFJC9CJLtwOHvR24FWy7ZbpG9uWky1M",
+  authDomain: "jewelleryapp-9f048.firebaseapp.com",
+  projectId: "jewelleryapp-9f048",
+  storageBucket: "jewelleryapp-9f048.appspot.com",
+  messagingSenderId: "1077692801003",
+  appId: "1:1077692801003:web:8b98ac4a5afe7c045203ae",
 });
+export const db = getFirestore(JewelleryApp);
 export const auth = getAuth(JewelleryApp);

@@ -4,7 +4,7 @@ export const fetchJewellery = createAsyncThunk(
   async () => {
     try {
       const jewelleryPromise = fetch(
-        "https://jewelery-store-5aceb-default-rtdb.europe-west1.firebasedatabase.app/data.json"
+        "https://jewelleryapp-9f048-default-rtdb.europe-west1.firebasedatabase.app/data.json"
       );
       return await (await jewelleryPromise).json();
     } catch (error) {
