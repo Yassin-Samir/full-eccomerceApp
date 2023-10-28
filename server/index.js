@@ -5,7 +5,22 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = Express();
 const stripeApp = new Stripe(process.env.STRIPE_SECRET);
-app.use(cors());
+const whitelist = [
+  "https://full-eccomerce-app.vercel.app",
+  "https://full-eccomerce-app-git-main-rack435.vercel.app",
+  "https://full-eccomerce-c1twsa3av-rack435.vercel.app",
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      const isExists = whitelist.indexOf(origin) !== -1;
+      callback(
+        isExists ? null : new Error("Not allowed by CORS"),
+        isExists ? true : undefined
+      );
+    },
+  })
+);
 app.post("/checkoutSession", Express.json(), async (req, res) => {
   try {
     const { url } = await stripeApp.checkout.sessions.create({
