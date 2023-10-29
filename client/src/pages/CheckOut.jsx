@@ -40,6 +40,7 @@ function CheckOut() {
           quantity: item?.quantity,
         })),
         email: user.email,
+        uid: user.uid,
       })
     );
   };

@@ -14,10 +14,13 @@ export const CheckoutAction = createAsyncThunk(
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            line_items: action.lineItems,
-            success_url: `${window.location.origin}/checkout/success`,
-            cancel_url: window.location.origin,
-            customer_email: action.email,
+            checkoutData: {
+              line_items: action.lineItems,
+              success_url: `${window.location.origin}/checkout/success`,
+              cancel_url: window.location.origin,
+              customer_email: action.email,
+            },
+            uid: action.uid,
           }),
         })
       ).json();
