@@ -29,9 +29,14 @@ const db = getFirestore(firebaseApp);
 app.use(
   cors({
     origin: function (origin, callback) {
-      const isExists = whitelist.indexOf(origin) !== -1;
+      const isExists =
+        whitelist.indexOf(origin) !== -1
+          ? true
+          : origin === undefined
+          ? true
+          : false;
       if (!isExists) {
-        callback(new Error(`Not allowed by CORS ${origin}`));
+        callback(new Error(`Not allowed by CORS`));
         return;
       }
       callback(null, origin);
