@@ -14,6 +14,7 @@ const whitelist = [
   "https://full-eccomerce-app.vercel.app",
   "https://full-eccomerce-app-git-main-rack435.vercel.app",
   "https://full-eccomerce-c1twsa3av-rack435.vercel.app",
+  "https://stripe.com",
 ];
 const firebaseApp = initializeApp({
   credential: credential.cert({
