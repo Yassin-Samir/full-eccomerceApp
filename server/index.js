@@ -1,5 +1,4 @@
 import Express from "express";
-import bodyParser from "body-parser";
 import Stripe from "stripe";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -15,7 +14,7 @@ const whitelist = [
   "https://full-eccomerce-app.vercel.app",
   "https://full-eccomerce-app-git-main-rack435.vercel.app",
   "https://full-eccomerce-c1twsa3av-rack435.vercel.app",
-  "http://localhost:3000",
+  "https://stripe.com",
 ];
 const firebaseApp = initializeApp({
   credential: credential.cert({
@@ -44,7 +43,7 @@ app.use(
     },
   })
 );
-app.post("/checkoutSession", bodyParser.json(), async (req, res) => {
+app.post("/checkoutSession", Express.json(), async (req, res) => {
   try {
     const { url } = await stripeApp.checkout.sessions.create({
       mode: "payment",
@@ -60,13 +59,15 @@ app.post("/checkoutSession", bodyParser.json(), async (req, res) => {
 
 app.post(
   "/webhook",
-  bodyParser.raw({ type: "application/json" }),
+  Express.json({
+    verify: (req, res, buffer) => (req["rawBody"] = buffer),
+  }),
   async (request, response) => {
     const sig = request.headers["stripe-signature"];
     let event;
     try {
       event = stripeApp.webhooks.constructEvent(
-        request.body,
+        request.rawBody,
         sig,
         process.env.WEBHOOK_SECRET
       );
