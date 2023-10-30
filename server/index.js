@@ -31,7 +31,7 @@ app.use(
     origin: function (origin, callback) {
       const isExists = whitelist.indexOf(origin) !== -1;
       if (!isExists) {
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error(`Not allowed by CORS ${origin}`));
         return;
       }
       callback(null, origin);
