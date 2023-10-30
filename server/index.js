@@ -29,10 +29,11 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const isExists = whitelist.indexOf(origin) !== -1;
-      callback(
-        isExists ? null : new Error("Not allowed by CORS"),
-        isExists ? true : undefined
-      );
+      if (!isExists) {
+        callback(new Error("Not allowed by CORS"));
+        return;
+      }
+      callback(null, origin);
     },
   })
 );
