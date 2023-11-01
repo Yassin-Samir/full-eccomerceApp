@@ -66,13 +66,13 @@ app.post(
     const sig = request.headers["stripe-signature"];
     let event;
     console.log({
-      r: request.rawBody,
+      r: request.rawBody?.toString(),
       sig,
       secret: process.env.WEBHOOK_SECRET,
     });
     try {
       event = stripeApp.webhooks.constructEvent(
-        request.rawBody,
+        request.rawBody?.toString(),
         sig,
         process.env.WEBHOOK_SECRET
       );
