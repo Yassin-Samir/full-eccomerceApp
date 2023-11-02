@@ -91,10 +91,32 @@ app.post(
         const { uid } = metadata;
         const UserRef = db.collection("users").doc(uid);
         const doc = (await UserRef.get()).data();
-        lineItems.data.map((lineItem) =>
-          (async () =>
-            await UserRef.set({ ...doc, orders: [...doc.orders, lineItem] }))()
+        let order = { orderId: event.data.object.payment_intent, Total: 0 };
+        lineItems.data.map(
+          ({ description: name, amount_total, price: { id }, quantity }) => {
+            order[name] = {
+              name,
+              price: amount_total / 100,
+              status: "Not Shipped",
+              id,
+              quantity,
+            };
+          }
         );
+        order.Total = Object.values(order)
+          .filter((value) => typeof value === "object")
+          .reduce(
+            (accumulator, { price, quantity }) =>
+              accumulator + price * quantity,
+            0
+          );
+        try {
+          await UserRef.set({ ...doc, orders: [...doc.orders, order] });
+        } catch (error) {
+          console.log({ error });
+          response.status(400).send(error.message);
+          return;
+        }
         break;
       default:
         break;

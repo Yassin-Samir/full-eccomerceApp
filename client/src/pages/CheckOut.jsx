@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { object, string } from "yup";
 import { CheckoutAction } from "../redux/slices/cart";
-import { CartSelector, UserSelector } from "../redux/selectors";
+import {
+  CartSelector,
+  UserSelector,
+  isAddingItemSelector,
+} from "../redux/selectors";
 import {
   Alert,
   AlertTitle,
@@ -32,6 +36,7 @@ function CheckOut() {
   const dispatch = useDispatch();
   const { cartItems, error, IsLoading } = useSelector(CartSelector);
   const { LoggedIn, user } = useSelector(UserSelector);
+  const isAddingItem = useSelector(isAddingItemSelector);
   const handleSubmit = () => {
     dispatch(
       CheckoutAction({
@@ -145,6 +150,8 @@ function CheckOut() {
                   ? "Please Login first"
                   : !cartItems.length
                   ? "Please add Items in your cart"
+                  : isAddingItem
+                  ? "Wait We Are Adding an Item"
                   : !isValid || !dirty
                   ? "Please Fill in the form"
                   : null
@@ -171,7 +178,9 @@ function CheckOut() {
                   variant="contained"
                   color="primary"
                   size="large"
-                  disabled={!cartItems.length || !isValid || !dirty}
+                  disabled={
+                    !cartItems.length || isAddingItem || !isValid || !dirty
+                  }
                   loading={IsLoading}
                   sx={{ width: "100%" }}
                 >
