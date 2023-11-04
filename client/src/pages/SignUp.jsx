@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, Formik, Form } from "formik";
 import { object, string } from "yup";
+import { LogIn } from "../redux/slices/credentials";
 import { UserSelector } from "../redux/selectors";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import WelcomeUser from "../components/WelcomeLogin";
+import { doc, setDoc } from "firebase/firestore";
 const captialLettersRegex = /(?=.*[A-Z])/;
 const specialCaseCharacter = /(?=.*[!@#$&*])/;
 const includeNumber = /(?=.*[0-9])/;
@@ -24,8 +26,8 @@ const validationSchema = object({
     .matches(specialCaseCharacter, {
       message: "Please add at least 1 special character",
     })
-    .matches(includeNumber, { message: "Please include at lease 1 number" })
-    .min(8, "Your password must exceed 8 charcterd"),
+    .matches(includeNumber, { message: "Please include at least 1 number" })
+    .min(8, "Your password must exceed 8 characters"),
 });
 const textFieldStyles = {
   input: { color: "white" },
@@ -35,6 +37,7 @@ function SignUp() {
   const { LoggedIn, user } = useSelector(UserSelector);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+  const dispatch = useDispatch();
   const handleSubmit = async (
     { email, password, name },
     { setErrors, setSubmitting }
@@ -45,10 +48,24 @@ function SignUp() {
         email,
         password
       );
-      const update = await updateProfile(userCredentials.user, {
+      const { user } = userCredentials;
+      await updateProfile(user, {
         displayName: name,
         photoURL: null,
       });
+      const UserRef = doc(db, "users", user.uid);
+      await setDoc(UserRef, {
+        displayName: name,
+        email: user.email,
+        orders: [],
+      });
+      dispatch(
+        LogIn({
+          displayName: name,
+          email: user.email,
+          uid: user.uid,
+        })
+      );
     } catch (error) {
       console.log(error);
       const shortenedError = error.code.substring(5, error.code.length);

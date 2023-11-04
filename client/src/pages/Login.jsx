@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Field, Form } from "formik";
 import { object, string } from "yup";
 import { UserSelector } from "../redux/selectors";
+import { LogIn } from "../redux/slices/credentials";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
@@ -22,6 +22,7 @@ const textFieldStyles = {
 function Login() {
   const { LoggedIn, user } = useSelector(UserSelector);
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
   const Navigate = useNavigate();
   const handleSubmit = async (
@@ -33,6 +34,14 @@ function Login() {
         auth,
         email,
         password
+      );
+      const { user } = userCredentials;
+      dispatch(
+        LogIn({
+          displayName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+        })
       );
       Navigate("/");
     } catch (error) {

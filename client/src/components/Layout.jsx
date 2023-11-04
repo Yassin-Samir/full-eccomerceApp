@@ -32,12 +32,18 @@ function Layout() {
   const { jewels, Loading } = useSelector(jewellerySelector);
   useEffect(() => {
     !jewels ? dispatch(fetchJewellery()) : null;
-    const unListen = auth.onAuthStateChanged((user) => {
+    const unlisten = auth.onAuthStateChanged((user) =>
       dispatch(
-        user ? LogIn({ ...user?.providerData[0], uid: user.uid }) : LogOut()
-      );
-    });
-    return unListen;
+        user
+          ? LogIn({
+              displayName: user.displayName,
+              email: user.email,
+              uid: user.uid,
+            })
+          : LogOut()
+      )
+    );
+    return unlisten;
   }, []);
   return (
     <ThemeProvider theme={theme}>

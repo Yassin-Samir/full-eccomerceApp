@@ -179,7 +179,11 @@ function CheckOut() {
                   color="primary"
                   size="large"
                   disabled={
-                    !cartItems.length || isAddingItem || !isValid || !dirty
+                    !LoggedIn ||
+                    !cartItems.length ||
+                    isAddingItem ||
+                    !isValid ||
+                    !dirty
                   }
                   loading={IsLoading}
                   sx={{ width: "100%" }}
