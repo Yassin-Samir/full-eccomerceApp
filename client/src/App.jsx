@@ -18,6 +18,7 @@ import "../src/css/shop.css";
 import "../src/css/App.css";
 import "../src/css/Nav.css";
 import "../src/css/footer.css";
+import "../src/css/Orders.css";
 import "../src/css/index.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -25,11 +26,12 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
-import Success from './pages/success'
+import Success from "./pages/success";
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Jewel = lazy(() => import("./pages/Jewel"));
 const CheckOut = lazy(() => import("./pages/CheckOut"));
+const Orders = lazy(() => import("./pages/Orders"));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout/success",
         element: <Success />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
       },
       {
         path: "/*",

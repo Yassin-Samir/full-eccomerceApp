@@ -23,10 +23,11 @@ const validationSchema = object({
     .matches(captialLettersRegex, {
       message: "Please add at least 1 capital letter",
     })
+
+    .matches(includeNumber, { message: "Please include at least 1 number" })
     .matches(specialCaseCharacter, {
       message: "Please add at least 1 special character",
     })
-    .matches(includeNumber, { message: "Please include at least 1 number" })
     .min(8, "Your password must exceed 8 characters"),
 });
 const textFieldStyles = {

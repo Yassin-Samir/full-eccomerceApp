@@ -5,6 +5,7 @@ const credentialsSlice = createSlice({
     LoggedIn: false,
     user: null,
     error: "",
+    orders: [],
   },
   reducers: {
     LogOut(state) {
@@ -15,8 +16,11 @@ const credentialsSlice = createSlice({
       state.LoggedIn = true;
       state.user = action.payload;
     },
+    addOrders(state, action) {
+      state.orders = action.payload;
+    },
   },
 });
 
-export const { LogOut, LogIn } = credentialsSlice.actions;
+export const { LogOut, LogIn, addOrders } = credentialsSlice.actions;
 export default credentialsSlice.reducer;

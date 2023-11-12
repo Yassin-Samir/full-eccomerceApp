@@ -10,6 +10,7 @@ import Nav from "./Nav";
 import UrlPath from "./UrlPath";
 import LoadingComponent from "./Loading";
 import Footer from "./footer";
+import OrdersListener from "../hooks/OrdersListener";
 
 const theme = createTheme({
   palette: {
@@ -45,12 +46,14 @@ function Layout() {
     );
     return unlisten;
   }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <header>
         <Nav />
       </header>
       <UrlPath />
+      <OrdersListener />
       <main>
         {!Loading ? (
           <Suspense fallback={<LoadingComponent />}>

@@ -1,0 +1,28 @@
+.Orders {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 50px auto;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+.Orders a {
+  width: 100%;
+}
+.Order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  overflow: hidden;
+  gap: 1rem;
+  width: 100%;
+}
+.Order .OrderImg {
+  max-width: 150px;
+  height: 100%;
+}
+.Order .OrderImg img {
+  width: 100%;
+}

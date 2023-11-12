@@ -24,7 +24,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
-  const Navigate = useNavigate();
   const handleSubmit = async (
     { email, password },
     { setErrors, setSubmitting }
@@ -43,7 +42,6 @@ function Login() {
           uid: user.uid,
         })
       );
-      Navigate("/");
     } catch (error) {
       console.log(error);
       const shortenedError = error.code.substring(5, error.code.length);
