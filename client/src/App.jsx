@@ -32,6 +32,7 @@ const Shop = lazy(() => import("./pages/Shop"));
 const Jewel = lazy(() => import("./pages/Jewel"));
 const CheckOut = lazy(() => import("./pages/CheckOut"));
 const Orders = lazy(() => import("./pages/Orders"));
+const Order = lazy(() => import("./pages/Order"));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
         path: "/orders",
         element: <Orders />,
       },
+      { path: "/orders/:orderId", element: <Order /> },
       {
         path: "/*",
         element: <NotFound />,

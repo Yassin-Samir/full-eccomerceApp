@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import firebase from "firebase-admin";
 import { initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 const { credential } = firebase;
 
@@ -26,6 +27,8 @@ const firebaseApp = initializeApp({
     "https://jewelleryapp-9f048-default-rtdb.europe-west1.firebasedatabase.app",
 });
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
+
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -45,6 +48,10 @@ app.use(
 );
 app.post("/checkoutSession", Express.json(), async (req, res) => {
   try {
+    const jwtToken = req.headers["user-token"];
+    const user = await auth.verifyIdToken(jwtToken);
+    console.log(user.uid, req.body.uid);
+    if (user?.uid !== req.body.uid) throw new Error("Wrong Jwt Token");
     const { url } = await stripeApp.checkout.sessions.create({
       mode: "payment",
       ...req.body.checkoutData,

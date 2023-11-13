@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getIdToken } from "firebase/auth";
+import { auth } from "../../firebase";
 export const addItem = createAsyncThunk("cart/addItem", async (action) => {
   await new Promise((res, rej) => setTimeout(res, 1500));
   return action;
@@ -7,11 +9,13 @@ export const CheckoutAction = createAsyncThunk(
   "cart/Checkout",
   async (action) => {
     try {
+      const jwtToken = await getIdToken(auth.currentUser);
       const getCheckoutUrl = await (
-        await fetch("https://full-eccomerce-app-server.vercel.app/checkoutSession", {
+        await fetch("http://localhost:4242/checkoutSession", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "user-token": jwtToken,
           },
           body: JSON.stringify({
             checkoutData: {

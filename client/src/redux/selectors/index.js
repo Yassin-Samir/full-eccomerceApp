@@ -53,3 +53,9 @@ export const CartSelector = createSelector(
     IsLoading,
   })
 );
+
+export const orderSelector = (orderId) =>
+  createSelector(
+    ({ credentials }) => credentials,
+    ({ orders }) => orders.find(({ orderId: objId }) => orderId === objId)
+  );
