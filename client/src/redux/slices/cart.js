@@ -11,7 +11,7 @@ export const CheckoutAction = createAsyncThunk(
     try {
       const jwtToken = await getIdToken(auth.currentUser);
       const getCheckoutUrl = await (
-        await fetch("http://localhost:4242/checkoutSession", {
+        await fetch("https://full-eccomerce-app-server.vercel.app/checkoutSession", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
