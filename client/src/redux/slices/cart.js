@@ -24,7 +24,6 @@ export const CheckoutAction = createAsyncThunk(
               cancel_url: window.location.origin,
               customer_email: action.email,
             },
-            uid: action.uid,
           }),
         })
       ).json();

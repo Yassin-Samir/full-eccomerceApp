@@ -50,12 +50,11 @@ app.post("/checkoutSession", Express.json(), async (req, res) => {
   try {
     const jwtToken = req.headers["user-token"];
     const user = await auth.verifyIdToken(jwtToken);
-    console.log(user.uid, req.body.uid);
-    if (user?.uid !== req.body.uid) throw new Error("Wrong Jwt Token");
+    console.log(user.uid);
     const { url } = await stripeApp.checkout.sessions.create({
       mode: "payment",
       ...req.body.checkoutData,
-      metadata: { uid: req.body.uid },
+      metadata: { uid: user?.uid },
     });
     res.json({ url });
   } catch (error) {
@@ -98,24 +97,30 @@ app.post(
         const { uid } = metadata;
         const UserRef = db.collection("users").doc(uid);
         const doc = (await UserRef.get()).data();
-        let order = {
+        const order = {
           orderId: event.data.object.payment_intent,
           Total: 0,
           Items: [],
         };
         lineItems.data.map(
-          ({ description: name, amount_total, price: { id }, quantity }) => {
+          ({
+            description: name,
+            amount_total,
+            price: { id, unit_amount },
+            quantity,
+          }) => {
             order.Items.push({
               name,
-              price: amount_total / 100,
+              price: unit_amount / 100,
               status: "Not Shipped",
               id,
+              totalAmount: amount_total / 100,
               quantity,
             });
           }
         );
-        order.Total = order.Items.reduce(
-          (accumulator, { price, quantity }) => accumulator + price * quantity,
+        order.Total = lineItems.data.reduce(
+          (accumulator, { amount_total }) => accumulator + amount_total / 100,
           0
         );
         try {
