@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { UserSelector } from "../redux/selectors";
-import { addOrders } from "../redux/slices/credentials";
 import { useOrders } from "./useOrdersData";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -12,7 +11,7 @@ function OrdersListener() {
     if (!user) return null;
     return doc(db, "users", user.uid);
   }, [user]);
-  useOrders(userDoc, addOrders);
+  useOrders(userDoc);
 }
 
 export default OrdersListener;

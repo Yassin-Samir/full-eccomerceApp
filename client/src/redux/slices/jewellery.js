@@ -32,17 +32,17 @@ const jewellery = createSlice({
       let filteredItems = Object.entries(state.jewels);
       brandsFilters.length &&
         (filteredItems = filteredItems.filter(
-          (item) => brandsFilters.indexOf(state.jewels[item[0]]["brand"]) !== -1
+          ([name]) => brandsFilters.indexOf(state.jewels[name].brand) !== -1
         ));
       priceFilters.length &&
         (filteredItems = filteredItems.filter(
-          (item) =>
-            +state.jewels[item[0]]["price"] >= +priceFilters[0] &&
-            +state.jewels[item[0]]["price"] <= +priceFilters[1]
+          ([name]) =>
+            Number(state.jewels[name].price) >= +priceFilters[0] &&
+            Number(state.jewels[name].price) <= +priceFilters[1]
         ));
       colorsFilters.length &&
-        (filteredItems = filteredItems.filter((item) =>
-          colorsFilterHelper(state.jewels, colorsFilters, item[0])
+        (filteredItems = filteredItems.filter(([name]) =>
+          colorsFilterHelper(state.jewels[name].colors, colorsFilters)
         ));
       state.previewedJewels = Object.fromEntries(filteredItems);
     },
@@ -62,11 +62,10 @@ const jewellery = createSlice({
     });
   },
 });
-const colorsFilterHelper = (data, filters, item) => {
-  for (let index = 0; index < data[item]["colors"].length; index++) {
-    const color = data[item]["colors"][index];
-    if (filters.indexOf(color) === -1) continue;
-    return true;
+const colorsFilterHelper = (jewelColors, filteredColors) => {
+  for (let index = 0; index < jewelColors.length; index++) {
+    const JewelColor = jewelColors[index];
+    if (filteredColors.indexOf(color) !== -1) return true;
   }
   return false;
 };

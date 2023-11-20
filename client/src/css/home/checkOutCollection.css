@@ -27,4 +27,5 @@
   align-content: space-between;
   text-transform: capitalize;
   line-height: 40px;
+  gap: 1rem;
 }

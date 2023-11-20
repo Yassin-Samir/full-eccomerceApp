@@ -7,6 +7,7 @@ import { jewelleryItemSelector } from "../../redux/selectors";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Jewel from "../jewel";
+import { Button } from "@mui/material";
 function SecondJewellerySlider() {
   const jewels = useSelector(jewelleryItemSelector);
 
@@ -48,9 +49,17 @@ function SecondJewellerySlider() {
           ipsum as their default model text, and a search for 'lorem ipsum'
           still in their infancy.
         </p>
-        <Link to={"/shop"} className="shopNowBtn">
+        <Button
+          variant="contained"
+          component={Link}
+          to={"/shop"}
+          sx={{
+            width: "110px",
+            textAlign: "center",
+          }}
+        >
           VIEW ALL
-        </Link>
+        </Button>
       </aside>
       <Swiper
         navigation={{
@@ -79,11 +88,11 @@ function SecondJewellerySlider() {
           Object.keys(jewels).map((key, ind) => (
             <SwiperSlide key={ind}>
               <Jewel
-                src={jewels[`${key}`]?.src}
+                src={jewels[key]?.src}
                 name={key}
-                brand={jewels[`${key}`]?.brand}
-                price={jewels[`${key}`]?.price}
-                priceId={jewels[`${key}`]?.priceId}
+                brand={jewels[key]?.brand}
+                price={jewels[key]?.price}
+                priceId={jewels[key]?.priceId}
               />
             </SwiperSlide>
           ))}

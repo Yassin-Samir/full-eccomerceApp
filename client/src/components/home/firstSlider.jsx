@@ -4,6 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image1 from "../../assets/banner1.jpg";
 import Image2 from "../../assets/banner2.jpg";
 import Image3 from "../../assets/banner3.jpg";
+import { Button } from "@mui/material";
 
 function FirstSlider() {
   return (
@@ -60,9 +61,9 @@ function Slide({ text, title, img }) {
       <div className="slideText">
         <h1>{title}</h1>
         <p>{text}</p>
-        <Link className="shopNowBtn" to={"/shop"}>
+        <Button variant="contained" component={Link} to={"/shop"}>
           Shop Now
-        </Link>
+        </Button>
       </div>
     </div>
   );

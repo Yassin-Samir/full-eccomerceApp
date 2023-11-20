@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { LogOut } from "../redux/slices/credentials";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { Button } from "@mui/material";
 import Link from "@mui/material/Link";
 function WelcomeUser({ user }) {
   const Navigate = useNavigate();
@@ -19,9 +20,9 @@ function WelcomeUser({ user }) {
   return (
     <div className="WelcomeUser">
       <p>Welcome {user?.displayName || ""}</p>
-      <button className="shopNowBtn" onClick={handleSignOut}>
+      <Button variant="contained" onClick={handleSignOut}>
         SignOut
-      </button>
+      </Button>
       <Link component={RoutingLink} underline="none" to={"/Orders"}>
         Orders
       </Link>

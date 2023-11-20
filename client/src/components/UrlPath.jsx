@@ -7,33 +7,21 @@ function UrlPath() {
     window.scrollTo(0, 0);
   }, [pathname]);
   const SeparatedRoutesArr = pathname.split("/").filter((route) => route);
-  const Path = SeparatedRoutesArr[SeparatedRoutesArr.length - 1];
-
+  const Path = decodeURIComponent(
+    SeparatedRoutesArr[SeparatedRoutesArr.length - 1]
+  );
   return (
     <HelmetProvider>
       <Helmet>
-        <title>
-          {pathname === "/" ? "Jewellery Store" : decodeURIComponent(Path)}
-        </title>
+        <title>{pathname === "/" ? "Jewellery Store" : Path}</title>
       </Helmet>
       {pathname === "/" ? null : (
         <div className="UrlPath">
-          <Link to={"/"}>Home</Link> /
-          <span className="active">{decodeURIComponent(Path)}</span>
+          <Link to={"/"}>Home</Link> /<span className="active">{Path}</span>
         </div>
       )}
     </HelmetProvider>
-  ); /* pathname === "/" ? null : (
-    <HelmetProvider>
-      <Helmet>
-        <title>{Path.replace(/%20/gi, " ")}</title>
-      </Helmet>
-      <div className="UrlPath">
-        <Link to={"/"}>Home</Link> /
-        <span className="active">{Path.replace(/%20/gi, " ")}</span>
-      </div>
-    </HelmetProvider>
-  ); */
+  );
 }
 
 export default UrlPath;

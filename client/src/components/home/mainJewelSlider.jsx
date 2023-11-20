@@ -64,17 +64,19 @@ function MainJewelSlider({ header, num }) {
         modules={[Navigation, Pagination]}
       >
         {jewels &&
-          Object.keys(jewels).map((key, ind) => (
-            <SwiperSlide key={ind}>
-              <Jewel
-                src={jewels[`${key}`]?.src}
-                name={key}
-                brand={jewels[`${key}`]?.brand}
-                price={jewels[`${key}`]?.price}
-                priceId={jewels[`${key}`]?.priceId}
-              />
-            </SwiperSlide>
-          ))}
+          Object.keys(jewels)
+            .sort(() => 0.5 - Math.random())
+            .map((key, ind) => (
+              <SwiperSlide key={ind}>
+                <Jewel
+                  src={jewels[`${key}`]?.src}
+                  name={key}
+                  brand={jewels[`${key}`]?.brand}
+                  price={jewels[`${key}`]?.price}
+                  priceId={jewels[`${key}`]?.priceId}
+                />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </section>
   );

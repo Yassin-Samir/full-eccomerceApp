@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Controller } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -15,7 +15,7 @@ function ImgSlider({ jewelImgs }) {
     <div className="JewelImgSlider">
       <img src={CurrentImg} loading="eager" />
       <Swiper
-        modules={[Navigation, Controller, Pagination]}
+        modules={[Navigation]}
         onSlideChange={({ realIndex }) => {
           setCurrentImg(jewelImgs[realIndex]);
         }}

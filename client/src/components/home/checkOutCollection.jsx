@@ -2,6 +2,7 @@ import React from "react";
 import Image1 from "../../assets/img1.jpg";
 import Image2 from "../../assets/img2.jpg";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function CheckOutCollection() {
   return (
@@ -18,9 +19,9 @@ function CheckOutCollection() {
             publishing packages and web page editors now use Lorem Ipsum as
             their
           </p>
-          <Link to={"/shop"} className="shopNowBtn">
+          <Button component={Link} to={"/shop"} fullWidth variant="contained">
             Shop Now
-          </Link>
+          </Button>
         </div>
       </div>
     </section>
