@@ -65,7 +65,7 @@ const jewellery = createSlice({
 const colorsFilterHelper = (jewelColors, filteredColors) => {
   for (let index = 0; index < jewelColors.length; index++) {
     const JewelColor = jewelColors[index];
-    if (filteredColors.indexOf(color) !== -1) return true;
+    if (filteredColors.indexOf(JewelColor) !== -1) return true;
   }
   return false;
 };
