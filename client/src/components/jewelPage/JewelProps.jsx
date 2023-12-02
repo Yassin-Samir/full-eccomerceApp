@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,9 +28,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { LoadingButton } from "@mui/lab";
 function JewelProps({ jewelItem }) {
   const { jewel } = useParams();
-  useEffect(() => {
-    setCount(1);
-  }, [jewel]);
   const { price, brand } = jewelItem;
   const [count, setCount] = useState(1);
   const dispatch = useDispatch();
