@@ -17,7 +17,7 @@ function Jewel() {
     <>
       <div className="jewelPage">
         <ImgSlider jewelImgs={jewelItem?.src} />
-        <JewelProps jewelItem={jewelItem} />
+        <JewelProps key={jewel} jewelItem={jewelItem} />
       </div>
       <MainJewelSlider num={5} header={"You may also like"} />
     </>
