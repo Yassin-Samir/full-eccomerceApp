@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
 
@@ -21,6 +21,7 @@ function SubscribeEmail() {
         <LoadingButton
           variant="contained"
           loading={Loading}
+          disabled={!Email}
           onClick={async () => {
             setLoading(true);
             await new Promise((res, rej) => setTimeout(res, 1500));
