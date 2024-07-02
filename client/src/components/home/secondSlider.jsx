@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
@@ -7,18 +7,29 @@ import { jewelleryItemSelector } from "../../redux/selectors";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Jewel from "../jewel";
-import { Button } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 function SecondJewellerySlider() {
   const jewels = useSelector(jewelleryItemSelector);
-
+  const forwardRef = useRef();
+  const PrevRef = useRef();
   return (
-    <section className="secondJewellerySlider">
+    <Box position={"relative"} margin={"50px auto 0"} width={"90%"}>
+      <h1
+        style={{
+          marginBottom: "20px",
+          width: "fit-content",
+          fontSize: "3rem",
+        }}
+      >
+        Best Sellers
+      </h1>
       <ArrowForwardOutlinedIcon
+        ref={forwardRef}
         id="NextSecondSliderBtn"
         sx={{
           cursor: "pointer",
           position: "absolute",
-          bottom: "102%",
+          bottom: "91.5%",
           right: "0px",
           color: "rgb(138, 138, 138) ",
           fontSize: "1.7rem",
@@ -28,12 +39,13 @@ function SecondJewellerySlider() {
         }}
       />
       <ArrowBackOutlinedIcon
+        ref={PrevRef}
         id="PrevSecondSliderBtn"
         sx={{
           cursor: "pointer",
           color: "rgb(138, 138, 138)",
           position: "absolute",
-          bottom: "102%",
+          bottom: "91.5%",
           right: "35px",
           fontSize: "1.7rem",
           zIndex: "50",
@@ -42,25 +54,6 @@ function SecondJewellerySlider() {
           },
         }}
       />
-      <aside>
-        <h1>Best Sellers</h1>
-        <p>
-          many desktop publishing packages and web page editors now use lorem
-          ipsum as their default model text, and a search for 'lorem ipsum'
-          still in their infancy.
-        </p>
-        <Button
-          variant="contained"
-          component={Link}
-          to={"/shop"}
-          sx={{
-            width: "110px",
-            textAlign: "center",
-          }}
-        >
-          VIEW ALL
-        </Button>
-      </aside>
       <Swiper
         navigation={{
           prevEl: "#PrevSecondSliderBtn",
@@ -81,7 +74,7 @@ function SecondJewellerySlider() {
           },
         }}
         spaceBetween={30}
-        loop={true}
+        loop
         modules={[Navigation, Pagination]}
       >
         {jewels &&
@@ -97,7 +90,7 @@ function SecondJewellerySlider() {
             </SwiperSlide>
           ))}
       </Swiper>
-    </section>
+    </Box>
   );
 }
 

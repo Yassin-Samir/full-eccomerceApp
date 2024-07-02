@@ -39,11 +39,6 @@
 .jewel h1 {
   font-size: 1.5rem;
 }
-.jewel > div {
-  width: 189px;
-  height: 207px;
-  overflow: hidden;
-}
 .jewel .JewelHovered {
   transition: 0.5s linear;
   -webkit-transition: 0.5s linear;

@@ -11,6 +11,7 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import WelcomeUser from "../components/WelcomeLogin";
+import FormikField from "../components/formikField";
 const validationSchema = object({
   email: string().email("Invalid Email").required("required"),
   password: string().required("required"),
@@ -70,27 +71,19 @@ function Login() {
               width: "100%",
             }}
           >
-            <Field
+            <FormikField
               name={"email"}
               type={"email"}
-              as={TextField}
               label={"Email"}
-              variant={"outlined"}
-              fullWidth={true}
-              error={Boolean(errors.email) && Boolean(touched.email)}
-              helperText={Boolean(touched.email) && errors.email}
+              fullWidth
               sx={textFieldStyles}
             />
-            <Field
+            <FormikField
               name={"password"}
               id="outlined-adornment-password"
               type={showPassword ? "text" : "password"}
-              as={TextField}
               label={"Password"}
-              variant={"outlined"}
-              fullWidth={true}
-              error={Boolean(errors.password) && Boolean(touched.password)}
-              helperText={Boolean(touched.password) && errors.password}
+              fullWidth
               sx={textFieldStyles}
               InputProps={{
                 endAdornment: (

@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import React from "react";
 
 function Footer() {
@@ -30,7 +31,13 @@ function Footer() {
         </section>
       </div>
       <div className="CopyWrite">
-        <p>© {new Date().getFullYear()} - Ecommerce software by Yassin</p>
+        <p>
+          © {new Date().getFullYear()} - E-commerce software by{" "}
+          <Link color={"inherit"} target="_blank" href="https://www.github.com/Yassin-Samir/full-eccomerceApp" underline="hover" sx={{ cursor: "pointer" }}>
+            {" "}
+            Yassin
+          </Link>
+        </p>
       </div>
     </>
   );

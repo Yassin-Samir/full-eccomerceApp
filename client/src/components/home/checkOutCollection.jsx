@@ -9,7 +9,6 @@ function CheckOutCollection() {
     <section className="CheckOutCollection">
       <img loading="eager" src={Image1} alt="two rings" />
       <div>
-        <img loading="eager" src={Image2} alt="golden ring" />
         <div>
           <h1>Check Out Our Collections</h1>
           <p>

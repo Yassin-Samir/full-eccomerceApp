@@ -15,10 +15,12 @@
   height: 10vh;
   gap: 10px;
 }
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .feature-text h1 {
   color: white;
   font-size: 1.5rem;
-}
-.feature-text .feature-text h1:hover {
-  color: rgb(232, 168, 110);
 }

@@ -11,6 +11,7 @@ import { LoadingButton } from "@mui/lab";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import WelcomeUser from "../components/WelcomeLogin";
 import { doc, setDoc } from "firebase/firestore";
+import FormikField from "../components/formikField";
 const captialLettersRegex = /(?=.*[A-Z])/;
 const specialCaseCharacter = /(?=.*[!@#$&*])/;
 const includeNumber = /(?=.*[0-9])/;
@@ -96,38 +97,26 @@ function SignUp() {
               width: "100%",
             }}
           >
-            <Field
+            <FormikField
               name={"name"}
               type={"text"}
-              as={TextField}
               label={"Name"}
-              variant={"outlined"}
-              fullWidth={true}
-              error={Boolean(errors.name) && Boolean(touched.name)}
-              helperText={Boolean(touched.name) && errors.name}
+              fullWidth
               sx={textFieldStyles}
             />
-            <Field
+            <FormikField
               name={"email"}
               type={"email"}
-              as={TextField}
               label={"Email"}
-              variant={"outlined"}
-              fullWidth={true}
-              error={Boolean(errors.email) && Boolean(touched.email)}
-              helperText={Boolean(touched.email) && errors.email}
+              fullWidth
               sx={textFieldStyles}
             />
-            <Field
+            <FormikField
               name={"password"}
               id="outlined-adornment-password"
               type={showPassword ? "text" : "password"}
-              as={TextField}
               label={"Password"}
-              variant={"outlined"}
               fullWidth={true}
-              error={Boolean(errors.password) && Boolean(touched.password)}
-              helperText={Boolean(touched.password) && errors.password}
               sx={textFieldStyles}
               InputProps={{
                 endAdornment: (
