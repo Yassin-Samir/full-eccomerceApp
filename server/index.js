@@ -54,6 +54,7 @@ app.post("/checkoutSession", Express.json(), async (req, res) => {
     const { url } = await stripeApp.checkout.sessions.create({
       mode: "payment",
       ...req.body.checkoutData,
+      payment_method_types: ["card", "klarna"],
       metadata: { uid: user?.uid },
     });
     res.json({ url });
