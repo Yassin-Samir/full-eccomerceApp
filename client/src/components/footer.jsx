@@ -33,9 +33,15 @@ function Footer() {
       <div className="CopyWrite">
         <p>
           © {new Date().getFullYear()} - E-commerce software by{" "}
-          <Link color={"inherit"} target="_blank" href="https://www.github.com/Yassin-Samir/full-eccomerceApp" underline="hover" sx={{ cursor: "pointer" }}>
+          <Link
+            color={"inherit"}
+            target="_blank"
+            href="https://www.linkedin.com/in/yassin-samir/"
+            underline="hover"
+            sx={{ cursor: "pointer" }}
+          >
             {" "}
-            Yassin
+            Yassin Samir
           </Link>
         </p>
       </div>
