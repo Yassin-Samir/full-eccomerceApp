@@ -36,7 +36,7 @@ function Footer() {
           <Link
             color={"inherit"}
             target="_blank"
-            href="https://www.linkedin.com/in/yassin-samir/"
+            href="https://yassin-samir.vercel.app"
             underline="hover"
             sx={{ cursor: "pointer" }}
           >
